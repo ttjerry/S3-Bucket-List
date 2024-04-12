@@ -1,7 +1,6 @@
 #!/bin/bash
   
  getlist() {
-    current_datetime=$(date +"%Y-%m-%d %H:%M")
     output_file="list.txt"
     cd output
     touch $output_file
@@ -10,7 +9,7 @@
 
 counter=1
 
-until [ $counter -gt 20 ]; 
+until [ $counter -gt 15 ]; 
 do
     printf "-"
     ((counter++))
