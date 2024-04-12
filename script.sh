@@ -1,7 +1,8 @@
 #!/bin/bash
   
  getlist() {
-    output_file="list.txt"
+    output_file="list.txt"    
+    > $output_file
     cd output
     touch $output_file
     aws s3 ls s3://clouduploadertds > $output_file 
