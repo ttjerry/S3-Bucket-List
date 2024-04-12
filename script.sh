@@ -2,7 +2,6 @@
   
  getlist() {
     output_file="list.txt"    
-    > $output_file
     cd output
     touch $output_file
     aws s3 ls s3://clouduploadertds > $output_file 
@@ -16,5 +15,12 @@ do
     ((counter++))
 done
 
-getlist
+if [ $? -eq 0 ]; then
+    getlist
+    
+    echo "Request successful"
+else
+    echo "Request failed, check network and try again"
+fi
+
 
