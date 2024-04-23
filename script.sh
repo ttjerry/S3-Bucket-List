@@ -1,26 +1,22 @@
 #!/bin/bash
-  
- getlist() {
-    output_file="list.txt"    
-    cd output
-    touch $output_file
-    aws s3 ls s3://clouduploadertds > $output_file 
+
+getlist() {
+    output_file="list.txt"
+    mkdir -p output && touch output/list.txt
+    counter=1
+    max_retries=10
+    until [ $counter -gt $max_retries ]; do
+        if aws s3 ls s3://clouduploadertds > output/list.txt; then
+            break
+        fi
+        ((counter++))
+    done
+
+    if [ $counter -gt $max_retries ]; then
+        echo "Error: Failed to list S3 bucket after $max_retries retries"
+        exit 1
+    fi
 }
 
-counter=1
-
-until [ $counter -gt 15 ]; 
-do
-    printf "-"
-    ((counter++))
-done
-
-if [ $? -eq 0 ]; then
-    getlist
-    
-    echo "Request successful"
-else
-    echo "Request failed, check network and try again"
-fi
-
-
+getlist
+echo "Request successful"
