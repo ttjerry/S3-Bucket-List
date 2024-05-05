@@ -1,6 +1,6 @@
 # **Cloud uploader CLI**
 
-This is a tool that helps us to upload files to the cloud using the CLI. It was built using bash and AWS storage service s3
+This is a tool that helps us to upload files to the cloud using the CLI. It was built using bash scripting and AWS storage service s3
 
 ## Installation
 
